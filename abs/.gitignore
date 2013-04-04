@@ -1,0 +1,8 @@
+wp-cli/src
+wp-cli/pkg
+wp-cli/*.tar.gz
+wp-cli/*.tar.xz
+wp-cli-git/src
+wp-cli-git/pkg
+wp-cli-git/*.tar.gz
+wp-cli-git/*.tar.xz
