@@ -1,0 +1,21 @@
+# Maintainer: Jeff Sebring <jeff@jeffsebring.com>
+pkgname=wp-cli
+pkgver=0.9.1
+pkgrel=1
+pkgdesc="A command line interface for WordPress"
+arch=('any')
+url="http://wp-cli.org"
+license=('MIT')
+depends=('php')
+source=(https://github.com/wp-cli/wp-cli/archive/v$pkgver.tar.gz)
+md5sums=('51159ae6f74740edeac4d1489ba3de0e')
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  
+  # install Composer
+  ./utils/dev-build
+
+}
+
+# vim:set ts=2 sw=2 et:

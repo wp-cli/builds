@@ -1,0 +1,45 @@
+# Maintainer: Jeff Sebring <jeff@jeffsebring.com>
+pkgname=wp-cli-git
+pkgver=20130404
+pkgrel=1
+pkgdesc="A command line interface for WordPress"
+arch=('any')
+url="http://wp-cli.org"
+license=('MIT')
+depends=('php')
+makedepends=('git')
+provides=('wp-cli')
+conflicts=('wp-cli')
+_gitroot=https://github.com/wp-cli/wp-cli.git
+_gitname="wp-cli"
+
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to Github.com...."
+
+  if [[ -d "$_gitname" ]]; then
+    cd "$_gitname" && git pull origin
+    msg "The local files are updated."
+  else
+    git clone "$_gitroot" "$_gitname"
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting build..."
+
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
+
+}
+
+package() {
+  cd "$srcdir/$_gitname-build"
+  
+  # install Composer
+  ./utils/dev-build
+
+}
+
+# vim:set ts=2 sw=2 et:
